@@ -3,7 +3,6 @@ import unittest
 
 # TODO: 다 못품.. Timeout 문제 남
 
-
 def abacaba(k):
     initial_string = ''
     for idx, ele in enumerate(string.ascii_lowercase):
@@ -44,4 +43,4 @@ class TestAbaCaba(unittest.TestCase):
         actual = abacaba(k)
         # Then: test should return 1
         self.assertEqual(actual, 'c')
-        
+
