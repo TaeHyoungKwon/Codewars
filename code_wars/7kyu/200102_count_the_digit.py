@@ -3,7 +3,7 @@ import unittest
 
 def nb_dig(n, d):
 
-    return sum(1 * str(ele ** 2).count(str(d)) for ele in range(n + 1) if str(d) in str(ele ** 2))
+    return sum(str(ele ** 2).count(str(d)) for ele in range(n + 1))
 
     
 class TestNbDig(unittest.TestCase):
@@ -27,7 +27,7 @@ class TestNbDig(unittest.TestCase):
         # Given: Set n, d
         n, d = 10, 1
         # When: Call nb_dig
-        actual = nb_dig(n, d)
+        actual = nb_dig(n, d)`
         # Then: should return 4
         self.assertEqual(actual, 4)
 
