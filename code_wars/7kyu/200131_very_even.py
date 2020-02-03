@@ -1,10 +1,6 @@
 import unittest
 
 
-def check_even_number_when_digit_is_one(n):
-    return len(str(n)) == 1 and n % 2 == 0
-
-
 def is_very_even_number(n):
     digits = len(str(n))
     if digits > 1:
@@ -14,7 +10,7 @@ def is_very_even_number(n):
             if digits > 1:
                 n = sum(list(map(int, str(n))))
                 digits = len(str(n))
-    return check_even_number_when_digit_is_one(n)
+    return n % 2 == 0
 
 
 class Test(unittest.TestCase):
