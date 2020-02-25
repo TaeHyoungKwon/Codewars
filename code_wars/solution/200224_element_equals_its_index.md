@@ -8,6 +8,8 @@ def index_equals_value(arr):
         else:
             lo = mid + 1
     return lo if lo < len(arr) and arr[lo] == lo else -1
+    
+    
 ```
 
 ```python
