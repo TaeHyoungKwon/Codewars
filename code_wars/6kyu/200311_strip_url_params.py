@@ -11,13 +11,14 @@ import unittest
 
 COMMA = ", "
 AND = " and "
+EMPTY_STRING = ""
 
 
 def format_words(words):
     if not words:
-        return ""
+        return EMPTY_STRING
 
-    list_without_empty_string = [ele for ele in words if ele != ""]
+    list_without_empty_string = [ele for ele in words if ele]
     if len(list_without_empty_string) < 3:
         return AND.join(list_without_empty_string)
 
