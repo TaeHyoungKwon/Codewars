@@ -33,3 +33,25 @@ class TestKeithNumber(unittest.TestCase):
         n = 4
         actual = is_keith_number(n)
         self.assertEqual(actual, False)
+
+    def test_login_should_be_same_between_login_user_and_user_when_login_succeed(self):
+        # Given: Set user
+        # When: Call login with user
+        # Then: user should be login_user
+        pass
+    
+    def test_login_should_be_not_same_between_login_user_and_user_when_login_failed(self):
+        # Given: Set user
+        # When: Call login with different user
+        # Then: user should not be login_user
+        pass
+
+    def test_login_should_return_404_not_found_when_user_is_not_found(self):
+        # Given: Set user
+        # When: Call login with user is not found in DB
+        # Then: login shold return 404_not_found
+
+    def test_login_should_return_401_unauthorized_when_password_is_not_match(self):
+        # Given: Set user
+        # When: 패스워드가 일치하지 않는 user 호출
+        # Then: 로그인 메서드는 401_unauthorized를 리턴
