@@ -5,8 +5,9 @@ def calc_mininum(a, x):
     for idx in range((a - x) + 1):
         if (a + idx) % x == 0:
             return idx
-        if (a - idx) % x == 0:
+        elif (a - idx) % x == 0:
             return idx
+
 
 
 def minimum(a, x):
@@ -29,3 +30,8 @@ class TestMinimum(unittest.TestCase):
         a, x = 89, 74
         actual = minimum(a, x)
         self.assertEqual(actual, 15)
+
+    def test_should_return_273123_when_given_a_is_466469_x_is_739592(self):
+        a, x = 466469, 739592
+        actual = minimum(a, x)
+        self.assertEqual(actual, 273123)
