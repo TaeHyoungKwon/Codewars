@@ -1,12 +1,10 @@
-from collections import OrderedDict
 import unittest
 
 
 def solution(pairs):
     if not pairs:
         return ''
-
-    return ','.join('{} = {}'.format(str(ele), str(pairs[ele])) for ele in sorted(pairs.keys()))
+    return ','.join('{} = {}'.format(str(ele), str(pairs[ele])) for ele in sorted(pairs.keys(), key=lambda x: str(x)))
 
 
 class TestSolution(unittest.TestCase):
@@ -22,8 +20,6 @@ class TestSolution(unittest.TestCase):
 
         # Then: Should return replacement by string
         self.assertEqual(actual, 'a = 1,b = 2')
-
-
 
     def test_pairs_with_numeric(self):
         # Given: Set pairs
