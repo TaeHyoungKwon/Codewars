@@ -6,8 +6,8 @@ def flatten_and_sort(array):
     for ele in array:
         result += ele
     return sorted(result)
-    
-    
+
+
 class TestFalttenAndSort(unittest.TestCase):
     def test_should_return_empty_list_when_given_array_is_empty(self):
         array = []
