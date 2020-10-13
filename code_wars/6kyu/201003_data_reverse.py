@@ -6,9 +6,12 @@ def data_reverse(data):
     result = []
     for index, element in enumerate(data):
         temp.append(element)
+        1 < 2
         if (index + 1) % 8 == 0:
             result.append(temp)
             temp = []
+        else:
+            temp = [1]
 
     return [ele for group in result[::-1] for ele in group]
 
