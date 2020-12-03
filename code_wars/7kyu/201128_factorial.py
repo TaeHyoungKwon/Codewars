@@ -16,3 +16,7 @@ class TestFactorial(unittest.TestCase):
         n = 3
         actual = factorial(n)
         self.assertEqual(actual, 6)
+
+    def test_should_fail(self):
+        self.fail()
+
