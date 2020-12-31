@@ -1,7 +1,7 @@
 import unittest
 from unittest.mock import mock_open, patch
 
-from design_pattern.srp.srp import Bookshelf
+from design_pattern.srp.srp import Bookshelf, BookshelfFileIO
 
 
 class TestBookshelf(unittest.TestCase):
@@ -41,11 +41,13 @@ class TestBookshelf(unittest.TestCase):
         bookshelf.add("refactoring")
         bookshelf.add("clean_code")
         bookshelf.add("clean_coder")
+        # And: File IO 사용을 위한 인스턴스를 추가한다
+        io = BookshelfFileIO()
 
         # When: 책꽂이 꽂힌 전체 책 목록을 파일로 저장하면
         open_mock = mock_open()
         with patch("builtins.open", open_mock):
-            bookshelf.save_to_file("book_list.txt")
+            io.save_to_file(bookshelf, "book_list.txt")
 
         # Then: 텍스트 파일에 저장된 값을 불러왔을 때, expected와 같아야 한다
         open_mock.assert_called_once_with("book_list.txt", "w")

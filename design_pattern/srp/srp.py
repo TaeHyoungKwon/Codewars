@@ -9,9 +9,11 @@ class Bookshelf:
         return self.books.remove(name)
 
     def all_list(self):
-        return '\n'.join(f"{index}: {book}" for index, book in enumerate(self.books, 1))
+        return "\n".join(f"{index}: {book}" for index, book in enumerate(self.books, 1))
 
-    # SRP를 위반 하는 메소드
-    def save_to_file(self, filename):
+
+class BookshelfFileIO:
+    @staticmethod
+    def save_to_file(bookshelf, filename):
         with open(filename, "w") as file:
-            file.write(self.all_list())
+            file.write(bookshelf.all_list())
