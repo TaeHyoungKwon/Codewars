@@ -42,3 +42,16 @@ class TestBookshelfFielIO(BookshelfTestMixin, unittest.TestCase):
         open_mock.assert_called_once_with("book_list.txt", "w")
         expected = "1: refactoring\n2: clean_code\n3: clean_coder"
         open_mock.return_value.write.assert_called_once_with(expected)
+
+    def test_bookshelf_with_load(self):
+        # Given: File IO 사용을 위한 인스턴스를 추가한다
+        io = BookshelfFileIO()
+        expected = "1: refactoring\n2: clean_code\n3: clean_coder"
+
+        # When: 책꽂이 꽂힌 전체 책 목록을 파일로 저장하면
+        open_mock = mock_open(read_data=expected)
+        with patch("builtins.open", open_mock):
+            actual = io.load_to_file("book_list.txt")
+
+        # Then: 텍스트 파일에 저장된 값을 불러왔을 때, expected와 같아야 한다
+        self.assertEqual(actual, expected)
