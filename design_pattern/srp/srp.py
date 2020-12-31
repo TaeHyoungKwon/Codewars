@@ -21,10 +21,10 @@ class BookshelfFileIO:
     @staticmethod
     def load_to_file(filename):
         with open(filename, "r") as file:
-            return ''.join(file.readlines())
+            return "".join(file.readlines())
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     book_shelf = Bookshelf()
     book_shelf.add("refactoring")
     book_shelf.add("clean_code")
