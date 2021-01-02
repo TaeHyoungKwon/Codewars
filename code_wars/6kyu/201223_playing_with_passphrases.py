@@ -4,20 +4,20 @@ import unittest
 def play_pass(s, n):
     first_to_third_step_result = _get_first_to_third_step(s, n)
     result = _get_fourth_to_fifth_step(first_to_third_step_result)
-    return ''.join(result[::-1])
+    return "".join(result[::-1])
 
 
 def _complement_by_9(number):
     for i in range(0, len(number)):
         a = 9 - int(number[i])
-        number = (number[:i] + str(a) + number[i + 1:])
+        number = number[:i] + str(a) + number[i + 1 :]
     return number
 
 
 def _shift_alphabet(alphabet, n):
     shifted_alphabet_ascii = ord(alphabet) + n
-    if shifted_alphabet_ascii > ord('Z'):
-        return chr(ord('A') + (shifted_alphabet_ascii - ord('Z')) - 1)
+    if shifted_alphabet_ascii > ord("Z"):
+        return chr(ord("A") + (shifted_alphabet_ascii - ord("Z")) - 1)
     else:
         return chr(shifted_alphabet_ascii)
 
