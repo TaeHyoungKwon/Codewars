@@ -28,14 +28,13 @@ def statement(invoice, plays):
     dollar_format = '${:,.2f}'
 
     for perf in invoice["performances"]:
-        this_amount = amount_for(perf)
         volume_credits += max(perf["audience"] - 30, 0)
 
         if play_for(perf)["type"] == "comedy":
             volume_credits += math.floor(perf["audience"] / 5)
 
-        result += f' {play_for(perf)["name"]}: {dollar_format.format(this_amount / 100)} ({perf["audience"]}석)\n'
-        total_amount += this_amount
+        result += f' {play_for(perf)["name"]}: {dollar_format.format(amount_for(perf) / 100)} ({perf["audience"]}석)\n'
+        total_amount += amount_for(perf)
 
     result += f"총액: {dollar_format.format(total_amount / 100)}\n"
     result += f"적립 포인트': {volume_credits}점\n"
