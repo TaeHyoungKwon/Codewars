@@ -32,17 +32,21 @@ def statement(invoice, plays):
     def usd(a_number):
         return '${:,.2f}'.format(a_number / 100)
 
+    def total_volume_credits():
+        result = 0
+        for perf in invoice["performances"]:
+            result += volume_credits_for(perf)
+        return result
+
     total_amount = 0
-    volume_credits = 0
     result = f"청구 내역 (고객명: {invoice['customer']})\n"
 
     for perf in invoice["performances"]:
-        volume_credits += volume_credits_for(perf)
         result += f' {play_for(perf)["name"]}: {usd(amount_for(perf))} ({perf["audience"]}석)\n'
         total_amount += amount_for(perf)
 
     result += f"총액: {usd(total_amount)}\n"
-    result += f"적립 포인트': {volume_credits}점\n"
+    result += f"적립 포인트': {total_volume_credits()}점\n"
     return result
 
 
