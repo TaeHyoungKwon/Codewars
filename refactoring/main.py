@@ -29,17 +29,19 @@ def statement(invoice, plays):
             result += math.floor(a_performance["audience"] / 5)
         return result
 
+    def usd(a_number):
+        return '${:,.2f}'.format(a_number / 100)
+
     total_amount = 0
     volume_credits = 0
     result = f"청구 내역 (고객명: {invoice['customer']})\n"
-    dollar_format = '${:,.2f}'
 
     for perf in invoice["performances"]:
         volume_credits += volume_credits_for(perf)
-        result += f' {play_for(perf)["name"]}: {dollar_format.format(amount_for(perf) / 100)} ({perf["audience"]}석)\n'
+        result += f' {play_for(perf)["name"]}: {usd(amount_for(perf))} ({perf["audience"]}석)\n'
         total_amount += amount_for(perf)
 
-    result += f"총액: {dollar_format.format(total_amount / 100)}\n"
+    result += f"총액: {usd(total_amount)}\n"
     result += f"적립 포인트': {volume_credits}점\n"
     return result
 
