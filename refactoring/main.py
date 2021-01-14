@@ -61,3 +61,5 @@ if __name__ == "__main__":
         plays = json.load(json_file)
 
     print(statement(invoice, plays))
+
+
