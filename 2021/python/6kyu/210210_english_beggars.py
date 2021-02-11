@@ -7,7 +7,7 @@ def beggars(values, n):
     cnt = 0
 
     if n == 0:
-        return []d
+        return []
 
     if n > len(values):
         return values + [0] * (n - len(values))
