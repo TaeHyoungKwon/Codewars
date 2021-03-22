@@ -3,6 +3,7 @@ import unittest
 
 def pairs(ar):
     number_pairs = list(zip(ar, ar[1:]))[::2]
+    print(number_pairs)
     return sum(abs(first - last) == 1 for first, last in number_pairs)
 
 
