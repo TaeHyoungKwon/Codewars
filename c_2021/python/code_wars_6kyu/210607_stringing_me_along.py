@@ -1,0 +1,1 @@
+# Stringing me along 다시 풀어볼 필요 있음 -> 상태를 관자해야하기 때문에 inner method(wrapper)로 구현하는 것을 고려해 보
