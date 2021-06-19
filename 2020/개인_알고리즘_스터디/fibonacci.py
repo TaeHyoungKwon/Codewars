@@ -3,15 +3,25 @@ import unittest
 MEMOIZATION = [0] * 100
 
 
+# def fibonacci(num):
+#     if num == 0:
+#         return 0
+#     if num <= 2:
+#         return 1
+#     if MEMOIZATION[num] != 0:
+#         return MEMOIZATION[num]
+#     MEMOIZATION[num] = fibonacci(num - 1) + fibonacci(num - 2)
+#     return MEMOIZATION[num]
+
+
 def fibonacci(num):
-    if num == 0:
-        return 0
-    if num <= 2:
-        return 1
-    if MEMOIZATION[num] != 0:
-        return MEMOIZATION[num]
-    MEMOIZATION[num] = fibonacci(num - 1) + fibonacci(num - 2)
-    return MEMOIZATION[num]
+    a, b = 0, 1
+    for i in range(0, num):
+        a, b = b, a + b
+        if b > 10:
+            b = sum(map(int, str(b)))
+    return a
+
 
 
 num = int(input())
