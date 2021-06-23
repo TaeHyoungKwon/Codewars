@@ -31,4 +31,4 @@ def custom_sum_recursive_with_tail(v, acc=0):
 
 class TestSolutionRecursiveWithTail(unittest.TestCase):
     def test_custom_sum_recursive_with_tail(self):
-        self.assertEqual(custom_sum_recursive_with_tail(10), 55)
+        self.assertEqual(custom_sum_recursive_with_tail(10000), 55)
