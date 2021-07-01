@@ -20,7 +20,7 @@ class Spam(BaseModel):
 if __name__ == "__main__":
     # Recursive Models
     m = Spam(foo={"count": 4}, bars=[{"apple": "x1"}, {"apple": "x2"}])
-    m.dict() == {
+    assert m.dict() == {
         "foo": {"count": 4, "size": None},
         "bars": [
             {"apple": "x1", "banana": "y"},
