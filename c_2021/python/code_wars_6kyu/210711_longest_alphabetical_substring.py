@@ -3,7 +3,6 @@ import unittest
 
 
 def longest(s):
-    # 나중에 다시
     result = []
     temp = []
     prev_key = ""
