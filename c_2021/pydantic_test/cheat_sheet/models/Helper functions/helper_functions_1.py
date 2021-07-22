@@ -1,4 +1,3 @@
-import pickle
 from datetime import datetime
 
 from pydantic import BaseModel, ValidationError

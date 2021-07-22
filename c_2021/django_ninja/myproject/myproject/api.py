@@ -1,6 +1,6 @@
-from ninja import NinjaAPI, Path
+from ninja import NinjaAPI, Path, Query
 
-from myproject.schema import PathDate
+from myproject.schema import Filters, PathDate
 
 api = NinjaAPI()
 
@@ -36,3 +36,33 @@ def events_with_schema(request, date: PathDate = Path(...)):
     * Path(...)은 Django ninjadprp 해당 스키마가 path param으로 적용된다는 것을 알려주는 용도
     """
     return {"date": date.value()}
+
+
+WEAPONS = ["Ninjato", "Shuriken", "Katana", "Kama", "Kunai", "Naginata", "Yari"]
+
+
+@api.get("/weapons")
+def list_weapons(request, limit: int = 10, offset: int = 0):
+    """
+    Query param
+
+    * path param이 아닌, 함수 param은 query param으로 본다
+    * path param과 마찬가지로, parsing, validation, 자동 문서화 등에 장점을 가진다
+    * limit과 offset의 type은 함수 내부에서는 str로 변경된
+    """
+    return WEAPONS[offset: offset + limit]
+
+
+@api.get("/filter")
+def events(request, filters: Filters = Query(...)):
+    """
+    Query Param (Using Schema)
+
+    filters.dict()
+    --> ex) {'limit': 10, 'offset': 0, 'query': 'abcde', 'category__in': ['samplecate']}
+
+    """
+    return {"filters": filters.dict()}
+
+
+
