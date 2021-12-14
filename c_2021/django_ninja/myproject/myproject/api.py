@@ -65,4 +65,9 @@ def events(request, filters: Filters = Query(...)):
     return {"filters": filters.dict()}
 
 
+@api.get("/items/test/{int:item_id}")
+def read_item_with_path_converter(request, item_id):
+    return {"item_id": item_id}
+
+
 
