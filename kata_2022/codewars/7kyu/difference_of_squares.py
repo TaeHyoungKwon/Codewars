@@ -1,6 +1,7 @@
 def difference_of_squares(n: int):
-    sum_of_numbers = sum(range(1, n + 1))
-    sum_of_squared_numbers = sum(number ** 2 for number in range(1, n + 1))
+    number_range = range(1, n + 1)
+    sum_of_numbers = sum(number_range)
+    sum_of_squared_numbers = sum(number ** 2 for number in number_range)
     return abs(sum_of_numbers ** 2 - sum_of_squared_numbers)
 
 
