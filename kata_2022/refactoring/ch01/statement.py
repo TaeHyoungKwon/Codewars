@@ -8,12 +8,17 @@ def statement(invoice: dict[str, Any], plays: dict[str, Any]) -> str:
     for performance in invoice["performances"]:
         result += f'\t{get_play_for(performance, plays)["name"]}: {dollar_format(get_amount_for(performance, plays) / 100)} ({performance["audience"]} Seats)\n'
 
-    total_amount = 0
-    for performance in invoice["performances"]:
-        total_amount += get_amount_for(performance, plays)
+    total_amount = get_total_amount(invoice, plays)
 
     result += f"Total Amount: {dollar_format(total_amount / 100)}\n"
     result += f"Volume Credits: {get_total_volume_credits(invoice, plays)}\n"
+    return result
+
+
+def get_total_amount(invoice: dict, plays: dict) -> int:
+    result = 0
+    for performance in invoice["performances"]:
+        result += get_amount_for(performance, plays)
     return result
 
 
