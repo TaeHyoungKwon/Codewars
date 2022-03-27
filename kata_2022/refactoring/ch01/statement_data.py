@@ -11,9 +11,7 @@ class PerformanceCalculator:
     def get_amount(self) -> int:
         result = 0
         if self.play["type"] == "tragedy":
-            result = 40000
-            if self.performance["audience"] > 30:
-                result += 1000 * (self.performance["audience"] - 30)
+            raise Exception("Use subclass")
         elif self.play["type"] == "comedy":
             result = 30000
             if self.performance["audience"] > 20:
@@ -40,8 +38,14 @@ def enrich_performance(performance: dict, plays: dict) -> dict:
     result["amount"] = calculator.get_amount()
     return result
 
+
 class TragedyCalculator(PerformanceCalculator):
-    pass
+    def get_amount(self) -> int:
+        result = 40000
+        if self.performance["audience"] > 30:
+            result += 1000 * (self.performance["audience"] - 30)
+        return result
+
 
 
 class ComedyCalculator(PerformanceCalculator):
