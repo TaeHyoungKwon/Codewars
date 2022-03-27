@@ -7,6 +7,10 @@ def statement(invoice: dict[str, Any], plays: dict[str, Any]) -> str:
     statement_data = {}
     statement_data["customer"] = invoice["customer"]
     statement_data["performances"] = [enrich_performance(performance, plays) for performance in invoice["performances"]]
+    statement_data["total_amount"] = get_total_amount(statement_data)
+    statement_data["total_volume_credits"] = get_total_volume_credits(
+        statement_data
+    )
     return render_plain_text(statement_data)
 
 
@@ -45,8 +49,8 @@ def render_plain_text(data: dict) -> str:
             f"{get_usd(get_amount_for(performance) / 100)} "
             f'({performance["audience"]} Seats)\n'
         )
-    result += f"Total Amount: {get_usd(get_total_amount(data) / 100)}\n"
-    result += f"Volume Credits: {get_total_volume_credits(data)}\n"
+    result += f"Total Amount: {get_usd(data['total_amount'] / 100)}\n"
+    result += f"Volume Credits: {data['total_volume_credits']}\n"
     return result
 
 
