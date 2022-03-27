@@ -54,7 +54,7 @@ def get_total_volume_credits(data: dict) -> int:
 
 
 def get_usd(num: float) -> str:
-    return "${:,.2f}".format(num)
+    return "${:,.2f}".format(num / 100)
 
 
 def get_volume_credits_for(performance: dict[str, Union[str, int]]) -> int:
