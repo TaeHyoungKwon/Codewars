@@ -34,12 +34,17 @@ def create_statement_data(invoice: dict, plays: dict) -> dict:
 
 
 def enrich_performance(performance: dict, plays: dict) -> dict:
-    calculator = PerformanceCalculator(performance, get_play_for(performance, plays))
+    calculator = create_performance_calculator(performance, get_play_for(performance, plays))
     result = copy(performance)
     result["play"] = calculator.play
     result["amount"] = calculator.get_amount()
     return result
 
+
+def create_performance_calculator(
+        performance: dict, play: dict
+) -> PerformanceCalculator:
+    return PerformanceCalculator(performance, play)
 
 def get_play_for(performance: dict[str, Union[str, int]], plays: dict) -> dict:
     return plays[performance["playID"]]
