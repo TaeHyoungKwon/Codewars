@@ -1,7 +1,7 @@
 from typing import Any
 
 from kata_2022.refactoring.ch01.renderer import HtmlRenderer, PlainTextRenderer
-from kata_2022.refactoring.ch01.statement_data import create_statement_data, get_usd
+from kata_2022.refactoring.ch01.statement_data import create_statement_data
 
 
 def statement(invoice: dict[str, Any], plays: dict[str, Any]) -> str:
