@@ -3,10 +3,11 @@ from typing import Any, Union
 
 
 def statement(invoice: dict[str, Any], plays: dict[str, Any]) -> str:
-    return render_plain_text(invoice, plays)
+    statement_data = {}
+    return render_plain_text(statement_data, invoice, plays)
 
 
-def render_plain_text(invoice: dict, plays: dict) -> str:
+def render_plain_text(data: dict, invoice: dict, plays: dict) -> str:
     result = f'Invoice (Customer: {invoice["customer"]})\n'
     for performance in invoice["performances"]:
         result += f'\t{get_play_for(performance, plays)["name"]}: {dollar_format(get_amount_for(performance, plays) / 100)} ({performance["audience"]} Seats)\n'
