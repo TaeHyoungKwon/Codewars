@@ -8,15 +8,15 @@ def statement(invoice: dict[str, Any], plays: dict[str, Any]) -> str:
     result = f'Invoice (Customer: {invoice["customer"]})\n'
     dollar_format = "${:,.2f}".format
 
-    for perf in invoice["performances"]:
-        play = plays[perf["playID"]]
-        this_amount = get_amount_for(perf, play)
+    for performance in invoice["performances"]:
+        play = get_play_for(performance, plays)
+        this_amount = get_amount_for(performance, play)
 
-        volume_credits += max(perf["audience"] - 30, 0)
+        volume_credits += max(performance["audience"] - 30, 0)
         if play["type"] == "comedy":
-            volume_credits += math.floor(perf["audience"] / 5)
+            volume_credits += math.floor(performance["audience"] / 5)
 
-        result += f'\t{play["name"]}: {dollar_format(this_amount / 100)} ({perf["audience"]} Seats)\n'
+        result += f'\t{play["name"]}: {dollar_format(this_amount / 100)} ({performance["audience"]} Seats)\n'
         total_amount += this_amount
 
     result += f"Total Amount: {dollar_format(total_amount / 100)}\n"
@@ -24,7 +24,11 @@ def statement(invoice: dict[str, Any], plays: dict[str, Any]) -> str:
     return result
 
 
-def get_amount_for(performance: dict[str, Union[str, int]], play) -> int:
+def get_play_for(performance: dict[str, Union[str, int]], plays: dict) -> dict:
+    return plays[performance["playID"]]
+
+
+def get_amount_for(performance: dict[str, Union[str, int]], play: dict) -> int:
     result = 0
     if play["type"] == "tragedy":
         result = 40000
