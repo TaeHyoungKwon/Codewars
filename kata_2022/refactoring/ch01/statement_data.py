@@ -37,7 +37,7 @@ def enrich_performance(performance: dict, plays: dict) -> dict:
     calculator = PerformanceCalculator(performance, get_play_for(performance, plays))
     result = copy(performance)
     result["play"] = calculator.play
-    result["amount"] = get_amount_for(result)
+    result["amount"] = calculator.get_amount()
     return result
 
 
