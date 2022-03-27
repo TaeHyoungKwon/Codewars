@@ -40,11 +40,24 @@ def enrich_performance(performance: dict, plays: dict) -> dict:
     result["amount"] = calculator.get_amount()
     return result
 
+class TragedyCalculator(PerformanceCalculator):
+    pass
+
+
+class ComedyCalculator(PerformanceCalculator):
+    pass
+
 
 def create_performance_calculator(
         performance: dict, play: dict
 ) -> PerformanceCalculator:
-    return PerformanceCalculator(performance, play)
+    if play["type"] == "tragedy":
+        return TragedyCalculator(performance, play)
+    elif play["type"] == "comedy":
+        return ComedyCalculator(performance, play)
+    else:
+        raise ValueError(f"Unknown genre: {play['type']}")
+
 
 def get_play_for(performance: dict[str, Union[str, int]], plays: dict) -> dict:
     return plays[performance["playID"]]
