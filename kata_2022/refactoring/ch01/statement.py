@@ -1,6 +1,6 @@
 from typing import Any
 
-from kata_2022.refactoring.ch01.statement_data import create_statement_data, get_amount_for, get_usd
+from kata_2022.refactoring.ch01.statement_data import create_statement_data, get_usd
 
 
 def statement(invoice: dict[str, Any], plays: dict[str, Any]) -> str:
@@ -12,7 +12,7 @@ def render_plain_text(data: dict) -> str:
     for performance in data["performances"]:
         result += (
             f'\t{performance["play"]["name"]}: '
-            f"{get_usd(get_amount_for(performance))} "
+            f"{get_usd(performance['amount'])} "
             f'({performance["audience"]} Seats)\n'
         )
     result += f"Total Amount: {get_usd(data['total_amount'])}\n"

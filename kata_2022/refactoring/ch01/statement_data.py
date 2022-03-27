@@ -1,4 +1,5 @@
 from copy import copy
+from functools import reduce
 import math
 from typing import Union
 
@@ -9,17 +10,7 @@ class PerformanceCalculator:
         self.play = play
 
     def get_amount(self) -> int:
-        result = 0
-        if self.play["type"] == "tragedy":
-            raise Exception("Use subclass")
-        elif self.play["type"] == "comedy":
-            result = 30000
-            if self.performance["audience"] > 20:
-                result += 10000 + 500 * (self.performance["audience"] - 20)
-            result += 300 * self.performance["audience"]
-        else:
-            raise ValueError(f'Unknown genre: {self.play["type"]}')
-        return result
+        raise Exception("Use subclass")
 
 
 def create_statement_data(invoice: dict, plays: dict) -> dict:
@@ -47,14 +38,16 @@ class TragedyCalculator(PerformanceCalculator):
         return result
 
 
-
 class ComedyCalculator(PerformanceCalculator):
-    pass
+    def get_amount(self) -> int:
+        result = 30000
+        if self.performance["audience"] > 20:
+            result += 10000 + 500 * (self.performance["audience"] - 20)
+        result += 300 * self.performance["audience"]
+        return result
 
 
-def create_performance_calculator(
-        performance: dict, play: dict
-) -> PerformanceCalculator:
+def create_performance_calculator(performance: dict, play: dict) -> PerformanceCalculator:
     if play["type"] == "tragedy":
         return TragedyCalculator(performance, play)
     elif play["type"] == "comedy":
@@ -67,15 +60,8 @@ def get_play_for(performance: dict[str, Union[str, int]], plays: dict) -> dict:
     return plays[performance["playID"]]
 
 
-def get_amount_for(performance: dict[str, Union[str, int]]) -> int:
-    return PerformanceCalculator(performance, performance["play"]).get_amount()
-
-
 def get_total_amount(data: dict) -> int:
-    result = 0
-    for performance in data["performances"]:
-        result += get_amount_for(performance)
-    return result
+    return reduce(lambda total, p: total + p["amount"], data["performances"], 0)
 
 
 def get_total_volume_credits(data: dict) -> int:
