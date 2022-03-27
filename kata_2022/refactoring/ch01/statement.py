@@ -6,13 +6,18 @@ from typing import Any, Union
 def statement(invoice: dict[str, Any], plays: dict[str, Any]) -> str:
     statement_data = {}
     statement_data["customer"] = invoice["customer"]
-    statement_data["performances"] = [enrich_performance(performance) for performance in invoice["performances"]]
+    statement_data["performances"] = [enrich_performance(performance, plays) for performance in invoice["performances"]]
     return render_plain_text(statement_data, plays)
 
 
-def enrich_performance(performance: dict) -> dict:
+def enrich_performance(performance: dict, plays: dict) -> dict:
     result = copy(performance)
+    result["play"] = get_play_for(performance, plays)
     return result
+
+
+def get_play_for(performance: dict[str, Union[str, int]], plays: dict) -> dict:
+    return plays[performance["playID"]]
 
 
 def render_plain_text(data: dict, plays: dict) -> str:
@@ -47,10 +52,6 @@ def get_volume_credits_for(performance: dict[str, Union[str, int]], plays: dict)
     if get_play_for(performance, plays)["type"] == "comedy":
         result += math.floor(performance["audience"] / 5)
     return result
-
-
-def get_play_for(performance: dict[str, Union[str, int]], plays: dict) -> dict:
-    return plays[performance["playID"]]
 
 
 def get_amount_for(performance: dict[str, Union[str, int]], plays: dict) -> int:
