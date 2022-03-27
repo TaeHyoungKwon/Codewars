@@ -12,6 +12,9 @@ class PerformanceCalculator:
     def get_amount(self) -> int:
         raise Exception("Use subclass")
 
+    def get_volume_credits(self) -> int:
+        return max(self.performance["audience"] - 30, 0)
+
 
 def create_statement_data(invoice: dict, plays: dict) -> dict:
     statement_data = {}
@@ -35,6 +38,11 @@ class TragedyCalculator(PerformanceCalculator):
         result = 40000
         if self.performance["audience"] > 30:
             result += 1000 * (self.performance["audience"] - 30)
+        return result
+
+    def get_volume_credits(self) -> int:
+        result = super().get_volume_credits()
+        result += math.floor(self.performance["audience"] / 5)
         return result
 
 
