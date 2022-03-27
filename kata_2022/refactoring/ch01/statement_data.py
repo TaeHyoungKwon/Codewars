@@ -3,6 +3,11 @@ import math
 from typing import Union
 
 
+class PerformanceCalculator:
+    def __init__(self, performance):
+        self.performance = performance
+
+
 def create_statement_data(invoice: dict, plays: dict) -> dict:
     statement_data = {}
     statement_data["customer"] = invoice["customer"]
@@ -13,6 +18,7 @@ def create_statement_data(invoice: dict, plays: dict) -> dict:
 
 
 def enrich_performance(performance: dict, plays: dict) -> dict:
+    calculator = PerformanceCalculator(performance)
     result = copy(performance)
     result["play"] = get_play_for(performance, plays)
     result["amount"] = get_amount_for(result)
