@@ -10,10 +10,8 @@ def statement(invoice: dict[str, Any], plays: dict[str, Any]) -> str:
         result += f'\t{get_play_for(performance, plays)["name"]}: {dollar_format(get_amount_for(performance, plays) / 100)} ({performance["audience"]} Seats)\n'
         total_amount += get_amount_for(performance, plays)
 
-    volume_credits = get_total_volume_credits(invoice, plays)
-
     result += f"Total Amount: {dollar_format(total_amount / 100)}\n"
-    result += f"Volume Credits: {volume_credits}\n"
+    result += f"Volume Credits: {get_total_volume_credits(invoice, plays)}\n"
     return result
 
 
