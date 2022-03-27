@@ -1,7 +1,8 @@
 import math
+from typing import Any
 
 
-def statement(invoice: dict, plays: dict):
+def statement(invoice: dict[str, Any], plays: dict[str, Any]) -> str:
     total_amount = 0
     volume_credits = 0
     result = f'Invoice (Customer: {invoice["customer"]})\n'
