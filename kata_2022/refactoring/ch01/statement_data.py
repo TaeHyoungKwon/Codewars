@@ -5,7 +5,7 @@ from typing import Union
 
 
 class PerformanceCalculator:
-    def __init__(self, performance, play):
+    def __init__(self, performance: dict, play: dict):
         self.performance = performance
         self.play = play
 
