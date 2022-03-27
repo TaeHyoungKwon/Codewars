@@ -4,6 +4,10 @@ from typing import Any, Union
 
 
 def statement(invoice: dict[str, Any], plays: dict[str, Any]) -> str:
+    return render_plain_text(create_statement_data(invoice, plays))
+
+
+def create_statement_data(invoice:dict, plays:dict) -> dict:
     statement_data = {}
     statement_data["customer"] = invoice["customer"]
     statement_data["performances"] = [enrich_performance(performance, plays) for performance in invoice["performances"]]
@@ -11,7 +15,7 @@ def statement(invoice: dict[str, Any], plays: dict[str, Any]) -> str:
     statement_data["total_volume_credits"] = get_total_volume_credits(
         statement_data
     )
-    return render_plain_text(statement_data)
+    return statement_data
 
 
 def enrich_performance(performance: dict, plays: dict) -> dict:
