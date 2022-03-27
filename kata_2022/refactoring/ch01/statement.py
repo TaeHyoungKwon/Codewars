@@ -5,12 +5,13 @@ from typing import Any, Union
 def statement(invoice: dict[str, Any], plays: dict[str, Any]) -> str:
     statement_data = {}
     statement_data["customer"] = invoice["customer"]
+    statement_data["performances"] = invoice["performances"]
     return render_plain_text(statement_data, invoice, plays)
 
 
 def render_plain_text(data: dict, invoice: dict, plays: dict) -> str:
     result = f'Invoice (Customer: {data["customer"]})\n'
-    for performance in invoice["performances"]:
+    for performance in data["performances"]:
         result += f'\t{get_play_for(performance, plays)["name"]}: {dollar_format(get_amount_for(performance, plays) / 100)} ({performance["audience"]} Seats)\n'
     result += f"Total Amount: {dollar_format(get_total_amount(invoice, plays) / 100)}\n"
     result += f"Volume Credits: {get_total_volume_credits(invoice, plays)}\n"
