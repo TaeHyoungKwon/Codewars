@@ -1,3 +1,4 @@
+from copy import copy
 import math
 from typing import Any, Union
 
@@ -7,6 +8,11 @@ def statement(invoice: dict[str, Any], plays: dict[str, Any]) -> str:
     statement_data["customer"] = invoice["customer"]
     statement_data["performances"] = invoice["performances"]
     return render_plain_text(statement_data, plays)
+
+
+def enrich_performance(performance: dict) -> dict:
+    result = copy(performance)
+    return result
 
 
 def render_plain_text(data: dict, plays: dict) -> str:
