@@ -6,7 +6,7 @@ from typing import Any, Union
 def statement(invoice: dict[str, Any], plays: dict[str, Any]) -> str:
     statement_data = {}
     statement_data["customer"] = invoice["customer"]
-    statement_data["performances"] = invoice["performances"]
+    statement_data["performances"] = [enrich_performance(performance) for performance in invoice["performances"]]
     return render_plain_text(statement_data, plays)
 
 
