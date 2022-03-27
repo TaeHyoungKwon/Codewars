@@ -4,11 +4,12 @@ from typing import Any, Union
 
 def statement(invoice: dict[str, Any], plays: dict[str, Any]) -> str:
     total_amount = 0
+    volume_credits = 0
     result = f'Invoice (Customer: {invoice["customer"]})\n'
     dollar_format = "${:,.2f}".format
 
     for performance in invoice["performances"]:
-        volume_credits = get_volume_credits_for(performance, plays)
+        volume_credits += get_volume_credits_for(performance, plays)
 
         result += f'\t{get_play_for(performance, plays)["name"]}: {dollar_format(get_amount_for(performance, plays) / 100)} ({performance["audience"]} Seats)\n'
         total_amount += get_amount_for(performance, plays)
@@ -18,12 +19,11 @@ def statement(invoice: dict[str, Any], plays: dict[str, Any]) -> str:
     return result
 
 
-def get_volume_credits_for(performance, plays):
-    volume_credits = 0
-    volume_credits += max(performance["audience"] - 30, 0)
+def get_volume_credits_for(performance: dict[str, Union[str, int]], plays: dict) -> int:
+    result = max(performance["audience"] - 30, 0)
     if get_play_for(performance, plays)["type"] == "comedy":
-        volume_credits += math.floor(performance["audience"] / 5)
-    return volume_credits
+        result += math.floor(performance["audience"] / 5)
+    return result
 
 
 def get_play_for(performance: dict[str, Union[str, int]], plays: dict) -> dict:
