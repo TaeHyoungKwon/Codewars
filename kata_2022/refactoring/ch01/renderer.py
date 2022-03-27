@@ -10,9 +10,6 @@ class Renderer:
 
 
 class PlainTextRenderer(Renderer):
-    def __init__(self, data):
-        super().__init__(data)
-
     def render(self) -> str:
         result = f'Invoice (Customer: {self.statement_data["customer"]})\n'
         for performance in self.statement_data["performances"]:
@@ -27,9 +24,6 @@ class PlainTextRenderer(Renderer):
 
 
 class HtmlRenderer(Renderer):
-    def __init__(self, data):
-        super().__init__(data)
-
     def render(self) -> str:
         result = f"<h1>Invoice (Customer: {self.statement_data['customer']})</h1>\n"
         result += "<table>\n"
