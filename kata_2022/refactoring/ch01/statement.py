@@ -3,12 +3,12 @@ from typing import Any, Union
 
 
 def statement(invoice: dict[str, Any], plays: dict[str, Any]) -> str:
-    total_amount = 0
     result = f'Invoice (Customer: {invoice["customer"]})\n'
 
     for performance in invoice["performances"]:
         result += f'\t{get_play_for(performance, plays)["name"]}: {dollar_format(get_amount_for(performance, plays) / 100)} ({performance["audience"]} Seats)\n'
 
+    total_amount = 0
     for performance in invoice["performances"]:
         total_amount += get_amount_for(performance, plays)
 
