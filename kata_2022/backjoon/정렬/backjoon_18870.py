@@ -2,11 +2,14 @@ import sys
 
 
 def solution():
-    # 아직 못품
     number_count = int(sys.stdin.readline())
-    numbers = sys.stdin.readline().split()
-    sorted_numbers = sorted(numbers)
-    return " ".join(str(sorted_numbers.index(number)) for number in numbers)
+    numbers = list(map(int, sys.stdin.readline().split()))
+    sorted_numbers = sorted(list(set(numbers)))
+    mapping = {
+        sorted_number: index
+        for index, sorted_number in enumerate(sorted_numbers)
+    }
+    return " ".join(str(mapping[number]) for number in numbers)
 
 
 if __name__ == "__main__":
