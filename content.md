@@ -1621,7 +1621,7 @@ def some_func(x):
 []
 ```
 
-Where did the `"wtf"` go? Is it due to some special effect of `yield from`? Let's validate that,
+Where did the `"wtf"` go? Is it due to some special effect of `yield from`? Let's is_valid that,
 
 2\.
 
