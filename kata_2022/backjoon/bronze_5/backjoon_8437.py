@@ -1,3 +1,8 @@
+from typing import Annotated
+
+USTon = Annotated[int, "Unit of weight used in the United States"]
+
+
 def solution():
     all_apples = int(input())
     apple_count_that_klaudia_have_more_than_natalia = int(input())

@@ -1,6 +1,8 @@
 def solution():
     result = []
     index = 1
+
+
     while numbers := [int(number) for number in input().split()]:
         if len(numbers) == 1 and numbers[0] == 0:
             break
