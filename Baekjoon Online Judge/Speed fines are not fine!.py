@@ -1,6 +1,3 @@
-from enum import Enum
-
-
 LIMITED_SPEED_MSG = "Congratulations, you are within the speed limit!"
 NORMAL_SPEED_MSG = "You are speeding and your fine is ${fine}."
 
