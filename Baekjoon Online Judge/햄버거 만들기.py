@@ -4,3 +4,4 @@ def solution(burger_bread_count: int, patty_count: int) -> int:
 
 if __name__ == "__main__":
     print(solution(*map(int, input().split())))
+
